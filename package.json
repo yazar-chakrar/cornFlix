@@ -16,8 +16,11 @@
     "url": "https://github.com/yazar-chakrar/cornFlix/issues"
   },
   "homepage": "https://github.com/yazar-chakrar/cornFlix#readme",
-  "description": "",
   "dependencies": {
-    "joi": "^17.6.2"
-  }
+    "helmet": "^6.0.0",
+    "joi": "^17.6.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {},
+  "description": ""
 }

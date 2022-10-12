@@ -1,8 +1,25 @@
+/*jshint esversion: 6 */
+const starterDebugger = require('debug')('app:startup');
+const dbDebugger = require('debug')('app:db');
+const config = require('config');
+const helmet = require('helmet');
+const morgan = require('morgan');
 const Joi = require('joi');
 const express = require('express');
 const app = express();
 
 app.use(express.json());
+app.use(express.static('public'));
+app.use(helmet());
+if (app.get('env') == 'development'){
+  app.use(morgan('tiny'));
+
+}
+//
+
+console.log('App name: ' + config.get('name'));
+console.log('Mail server: ' + config.get('mail.host'));
+console.log('Mail password: ' + config.get('mail.password'));
 
 const genres = [
   { id: 1, name: 'Action' },  
