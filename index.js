@@ -1,5 +1,6 @@
 /*jshint esversion: 6 */
 const express = require('express');
+const mongoose = require('mongoose');
 const genres = require('./routes/genres');
 const home = require('./routes/home');
 const starterDebugger = require('debug')('app:startup');
@@ -7,9 +8,14 @@ const dbDebugger = require('debug')('app:db');
 /* const config = require('config');
  */const helmet = require('helmet');
 const morgan = require('morgan');
-const Joi = require('joi');
 
 const app = express();
+
+
+
+mongoose.connect('mongodb://localhost/corn-flix', { useNewUrlParser: true , useUnifiedTopology: true})
+    .then(()=> console.log('Connected to MongoDB...'))
+    .catch(errr => console.log('ERR: ',err.message));
 
 app.set('view engine', 'pug');
 app.set('views', './views');
