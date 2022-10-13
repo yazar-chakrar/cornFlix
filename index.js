@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+const movies = require('./routes/movies');
 const genres = require('./routes/genres');
 const custemers = require('./routes/custemers');
 const home = require('./routes/home');
@@ -12,6 +13,7 @@ mongoose.connect('mongodb://localhost/corn-flix', { useNewUrlParser: true , useU
 
 const app = express();
 
+app.use('/api/movies', movies);
 app.use('/api/genres', genres);
 app.use('/api/custemers', custemers);
 app.use('/', home);
