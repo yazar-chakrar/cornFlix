@@ -16,14 +16,13 @@
     "url": "https://github.com/yazar-chakrar/cornFlix/issues"
   },
   "homepage": "https://github.com/yazar-chakrar/cornFlix#readme",
+  "description": "",
   "dependencies": {
     "express": "^4.18.2",
-    "helmet": "^6.0.0",
+    "fawn": "^2.1.5",
     "joi": "^17.6.3",
-    "mongodb": "^4.10.0",
-    "mongoose": "^6.6.5",
-    "morgan": "^1.10.0",
-    "pug": "^3.0.2"
-  },
-  "description": ""
+    "joi-objectid": "^4.0.2",
+    "mongodb-driver": "^0.1.0",
+    "mongoose": "^6.6.5"
+  }
 }
