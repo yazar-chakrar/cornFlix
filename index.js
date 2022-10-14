@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
 
+const users = require('./routes/users');
 const rentals = require('./routes/rentals');
 const movies = require('./routes/movies');
 const genres = require('./routes/genres');
@@ -20,6 +21,7 @@ mongoose.connect('mongodb://localhost:27017/corn-flix', { useNewUrlParser: true 
 const app = express();
 app.use(express.json());
 
+app.use('/api/users', users);
 app.use('/api/rentals', rentals);
 app.use('/api/movies', movies);
 app.use('/api/genres', genres);
