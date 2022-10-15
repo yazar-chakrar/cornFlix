@@ -1,15 +1,16 @@
 /*jshint esversion: 8 */
+const asyncMiddleware = require('../middleware/async');
 const {Movie, validate} = require('../models/movie');
 const {Genre} = require('../models/genre');
 const express = require('express');
 const router = express.Router();
 
-router.get('/', async(req, res) => {
+router.get('/', asyncMiddleware(async(req, res) => {
     const movies = await Movie.find();
     res.send(movies);
-});
+}));
 
-router.post('/', async (req, res) => {
+router.post('/', asyncMiddleware(async (req, res) => {
     //console.log("------"+req.body.title);
     const { error } = validate(req.body); 
     if (error) return res.status(400).send(error.details[0].message);
@@ -28,7 +29,7 @@ router.post('/', async (req, res) => {
         });
     movie = await movie.save();
     res.send(movie);
-});
+}));
 
 module.exports = router;
 

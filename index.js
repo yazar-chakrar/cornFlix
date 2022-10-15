@@ -1,10 +1,14 @@
 /*jshint esversion: 6 */
+/* used placed of async middlware
+require('express-async-errors');*/
 const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
 
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
+
+const error = require('./middleware/error');
 
 const auth = require('./routes/auth');
 const users = require('./routes/users');
@@ -20,9 +24,9 @@ if (!config.get('jwtPrivateKey')){
     process.exit(1);
 }
 
-mongoose.connect('mongodb://localhost:27017/corn-flix', { useNewUrlParser: true , useUnifiedTopology: true})
+mongoose.connect('mongodb://localhost/corn-flix', { useNewUrlParser: true , useUnifiedTopology: true})
     .then(()=> console.log('Connected to MongoDB...'))
-    .catch(errr => console.log('ERR: ',err.message));
+    .catch(err => console.log('ERR: ',err.message));
 
 
 const app = express();
@@ -36,6 +40,7 @@ app.use('/api/genres', genres);
 app.use('/api/customers', customers);
 app.use('/', home);
 
+app.use(error);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
