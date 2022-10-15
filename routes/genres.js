@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.get('/', asyncMiddleware(async (req, res) => {
   const genres = await Genre.find().sort('name');
+  //throw new Error('SUML SERV ERR');
   res.send(genres);
 }));
   

@@ -1,6 +1,10 @@
 /*jshint esversion: 6 */
 /* used placed of async middlware
 require('express-async-errors');*/
+//loggin errors and save it
+const winston = require('winston');
+require('winston-mongodb');
+
 const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
@@ -17,7 +21,27 @@ const movies = require('./routes/movies');
 const genres = require('./routes/genres');
 const customers = require('./routes/customers');
 const home = require('./routes/home');
+const { transport } = require('winston');
 
+const app = express();
+
+process.on('uncaughtException', (ex)=>{
+    //console.log('UncaughtException found on startup.');
+    winston.error(ex.message, ex);
+    process.exit(1);
+});
+process.on('unhandledRejection', (ex)=>{
+    //console.log('unhandledRejection found on startup.');
+    winston.error(ex.message, ex);
+    process.exit(1);
+});
+
+winston.add(new winston.transports.File ({filename: 'logfile.log'}));
+//winston.add(new winston.transports.MongoDB ({db: 'mongodb://localhost/corn-flix/?authSource=admin', capped : true}));
+
+//throw new Error('UncaughtException : Something wrong happend on startup.');
+const p = Promise.reject(new Error('unhandledRejection ERROR.'));
+p.then(()=> console.log('unhandledRejection Suml done.'));
 //console.log(process.env.jwtPrivateKey);
 if (!config.get('jwtPrivateKey')){
     console.error('FATAL ERROR: jwtPrivateKey makanch.');
@@ -28,10 +52,7 @@ mongoose.connect('mongodb://localhost/corn-flix', { useNewUrlParser: true , useU
     .then(()=> console.log('Connected to MongoDB...'))
     .catch(err => console.log('ERR: ',err.message));
 
-
-const app = express();
 app.use(express.json());
-
 app.use('/api/auth', auth);
 app.use('/api/users', users);
 app.use('/api/rentals', rentals);
