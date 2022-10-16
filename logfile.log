@@ -22,3 +22,5 @@
 {"level":"info","message":"Connected to MongoDB..."}
 {"level":"info","message":"Connected to MongoDB..."}
 {"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Connected to mongodb://localhost/corn-flix..."}
+{"level":"error","message":"winston.logger is not a function winston.logger is not a function","stack":"TypeError: winston.logger is not a function\n    at C:\\Users\\YAZAR\\Documents\\node-workspace\\corn-flix\\startup\\db.js:8:28\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"}

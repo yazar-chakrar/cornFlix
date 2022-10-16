@@ -3,7 +3,7 @@ require('express-async-errors');*/
 //loggin errors and save it
 
 const winston = require('winston');
-require('winston-mongodb');
+//require('winston-mongodb');
 
 module.exports = function(){
     winston.add(new winston.transports.File ({filename: 'logfile.log'}));
