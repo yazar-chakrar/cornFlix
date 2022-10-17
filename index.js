@@ -5,10 +5,13 @@ const winston = require('winston');
 const app = express();
 
 require('./startup/conf')();
-require('./startup/logging')();
+//require('./startup/logging')();
 require('./startup/routes')(app);
 require('./startup/db')();
 require('./api/joi')();
+
+require('./graphql/route')(app);
+
 
 //throw new Error('UncaughtException : Something wrong happend on startup.');
 /* const p = Promise.reject(new Error('unhandledRejection ERROR.'));
